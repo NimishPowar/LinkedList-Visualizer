@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LinkView | Premium Linked List Visualizer</title>
+    <meta name="description" content="A high-end, interactive Linked List visualizer with glassmorphism and smooth animations.">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&family=JetBrains+Mono&display=swap" rel="stylesheet">
+    
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="dark-theme">
+    <div class="background-blobs">
+        <div class="blob blob-1"></div>
+        <div class="blob blob-2"></div>
+        <div class="blob blob-3"></div>
+    </div>
+
+    <main class="app-container">
+        <header class="app-header">
+            <div class="logo">
+                <i class="fas fa-link"></i>
+                <h1>Link<span>View</span></h1>
+            </div>
+            <div class="header-actions">
+                <div class="list-type-toggle">
+                    <button class="type-btn active" data-type="singly">Singly</button>
+                    <button class="type-btn" data-type="doubly">Doubly</button>
+                    <button class="type-btn" data-type="circular">Circular</button>
+                </div>
+                <button id="theme-toggle" class="icon-btn">
+                    <i class="fas fa-moon"></i>
+                </button>
+            </div>
+        </header>
+
+        <section class="visualizer-section glass">
+            <div id="canvas-container">
+                <svg id="visualizer-svg" width="100%" height="400">
+                    <defs>
+                        <!-- Forward Arrow -->
+                        <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+                            <polygon points="0 0, 10 3.5, 0 7" fill="#6366f1" />
+                        </marker>
+                        <!-- Backward Arrow -->
+                        <marker id="arrowhead-back" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+                            <polygon points="0 0, 10 3.5, 0 7" fill="#10b981" />
+                        </marker>
+                        <linearGradient id="nodeGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" style="stop-color:#818cf8;stop-opacity:1" />
+                            <stop offset="100%" style="stop-color:#6366f1;stop-opacity:1" />
+                        </linearGradient>
+                        <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+                            <feGaussianBlur stdDeviation="3" result="blur" />
+                            <feComposite in="SourceGraphic" in2="blur" operator="over" />
+                        </filter>
+                    </defs>
+                </svg>
+            </div>
+            <div class="visualizer-controls">
+                <div class="control-group">
+                    <input type="number" id="node-value" placeholder="Value" min="0" max="999">
+                    <button id="append-btn" class="primary-btn"><i class="fas fa-plus"></i> Append</button>
+                    <button id="prepend-btn" class="secondary-btn">Prepend</button>
+                </div>
+                <div class="control-group">
+                    <input type="number" id="target-value" placeholder="Position/Key">
+                    <button id="insert-btn" class="accent-btn">Insert After</button>
+                    <button id="delete-btn" class="danger-btn"><i class="fas fa-trash"></i> Delete</button>
+                </div>
+                <div class="control-group">
+                    <button id="search-btn" class="info-btn"><i class="fas fa-search"></i> Search</button>
+                    <button id="reverse-btn" class="info-btn"><i class="fas fa-redo"></i> Reverse</button>
+                    <button id="clear-btn" class="danger-outline-btn">Clear</button>
+                </div>
+            </div>
+        </section>
+
+        <section class="info-section">
+            <div class="code-panel glass">
+                <div class="panel-header">
+                    <span><i class="fas fa-code"></i> Logic Implementation</span>
+                    <div class="lang-selector">
+                        <select id="language-select">
+                            <option value="python">Python</option>
+                            <option value="javascript">JavaScript</option>
+                            <option value="cpp">C++</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="code-container">
+                    <pre><code id="code-display" class="language-python"># Current operation logic will appear here</code></pre>
+                </div>
+            </div>
+
+            <div class="stats-panel glass">
+                <div class="panel-header">
+                    <span><i class="fas fa-chart-simple"></i> List Stats</span>
+                </div>
+                <div class="stats-grid">
+                    <div class="stat-item">
+                        <label>Length</label>
+                        <span id="stat-length">0</span>
+                    </div>
+                    <div class="stat-item">
+                        <label>Head</label>
+                        <span id="stat-head">NULL</span>
+                    </div>
+                    <div class="stat-item">
+                        <label>Tail</label>
+                        <span id="stat-tail">NULL</span>
+                    </div>
+                    <div class="stat-item">
+                        <label>Complexity</label>
+                        <span id="stat-complexity">O(1)</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <footer class="app-footer">
+            <p>&copy; 2026 LinkView Premium. Built with precision.</p>
+        </footer>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>
